@@ -57,7 +57,7 @@ def create_eda_overview(frame: pd.DataFrame, target_column: str, output_dir: str
 #outlier box plot for salary and tenure columns
     outlier_cols = [
         col for col in [
-            "MonthlyIncome", "TotalWorkingYears"
+            "MonthlyIncome", "TotalWorkingYears", "NumCompaniesWorked", "TrainingTimesLastYear"
             ] 
         if col in frame.columns
                     ]
@@ -73,11 +73,11 @@ def create_eda_overview(frame: pd.DataFrame, target_column: str, output_dir: str
         plt.tight_layout()
         plt.savefig(outlier_path, dpi=150)
         plt.close()
-        artifacts["outliers_boxplots"] = outlier_path
+        artifacts["outlier_boxplots"] = outlier_path
 
     #Key categorical columns vs target (Attrition rate breakdown)
     cat_cols = [
-        c for c in ["BusinessTravel", "Department",  "EducationField", "Gender",  "JobRole",  "MaritalStatus", "Over18", "OverTime"]
+        c for c in ["Department",  "EducationField",  "JobRole",  "MaritalStatus"]
         if c in frame.columns and c != target_column
     ]
     for col in cat_cols:

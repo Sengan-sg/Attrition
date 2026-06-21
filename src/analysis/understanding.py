@@ -15,5 +15,6 @@ def summarize_dataset(frame: pd.DataFrame) -> dict:
         "columns": frame.columns.tolist(),
         "dtypes": frame.dtypes.astype(str).to_dict(),
         "missing_values": frame.isnull().sum().to_dict(),
-        "basic_statistics": frame.describe(include='all').to_dict()
+        "duplicate_rows": int(frame.duplicated().sum()),
+
     }

@@ -7,7 +7,7 @@ def _project_root() -> Path:
 
 @dataclass(slots=True)
 class ProjectPaths:
-    root: Path = _project_root()
+    root: Path = field(default_factory=_project_root)
     data_raw: Path = field(default_factory=lambda: _project_root() / "data" / "raw")
     data_processed: Path = field(default_factory=lambda: _project_root() / "data" / "processed")
     models: Path = field(default_factory=lambda: _project_root() / "models")

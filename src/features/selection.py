@@ -28,7 +28,7 @@ class VarianceSelector:
         numeric = frame.select_dtypes(include=["number"])
         variances = numeric.var()
         low_var_cols = set(variances[variances < self.threshold].index)
-        self._keep = [c for c in self._keep if c in frame.columns]
+        self._keep = [c for c in frame.columns if c not in low_var_cols]
         return self
     
     def transform(self, frame: pd.DataFrame) -> pd.DataFrame:
@@ -51,7 +51,8 @@ class CorrelationSelector:
         corr = numeric.corr().abs()
         #Upper triangle only
         upper = corr.where(np.triu(np.ones(corr.shape, dtype=bool), k=1))
-        self._drop = [col for col in upper.columns if (upper[col] > self.threshold.any())]
+        self._drop = [col for col in upper.columns if (upper[col] > self.threshold).any()]
+        return self
 
     def transform(self, frame: pd.DataFrame) -> pd.DataFrame:
         to_drop = [c for c in self._drop if c in frame.columns]

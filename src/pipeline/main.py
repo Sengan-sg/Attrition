@@ -1,12 +1,19 @@
 from __future__ import annotations
+
+import sys
 from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split
 
+CURRENT_FILE =Path(__file__).resolve()
+SRC_ROOT = CURRENT_FILE.parents[2]
+if str(SRC_ROOT) not in sys.path:
+    sys.path.insert(0, str(SRC_ROOT))
+
 from src.analysis.eda import create_eda_overview
 from src.configs.settings import Config
-from src.data_processing.cleaning import DataCleaner, clean_raw_data
-from src.data_processing.loader import load_dataset
+from src.data.cleaning import DataCleaner, clean_raw_data
+from src.data.loader import load_dataset
 from src.evaluation.metrics import evaluate_model
 from src.features.engineering import engineering_features
 from src.features.selection import CorrelationSelector, VarianceSelector, select_features
@@ -73,13 +80,13 @@ def run_pipeline(dataset_path: str | Path, output_model_path: str | Path | None 
 
     pipeline = build_pipeline(
         numeric_features=numeric_features,
-        categorical_features=categorical_features
+        categorical_features=categorical_features,
     )
 
 
     # Stratified K-fold cross-validaiton
     kfold = StratifiedKFold(
-        n_split=5, shuffle=True, random_state=config.model.random_state
+        n_splits=5, shuffle=True, random_state=config.model.random_state
     )
 
     cv_results = cross_validate(
@@ -114,7 +121,7 @@ def main():
     config = Config()
     ensure_directory(config.paths.models)
     dataset_path = config.paths.data_raw / "employee_attrition.csv"
-    model_path = config.paths.models / "attrition_models.joblib"
+    model_path = config.paths.models / "attrition_model.joblib"
     run_pipeline(dataset_path=dataset_path, output_model_path=model_path)
 
 if __name__=="__main__":

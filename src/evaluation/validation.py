@@ -8,7 +8,7 @@ def validate_model(model, features: pd.DataFrame, target: pd.Series, scoring: li
         features,
         target,
         cv=5,
-        scoring=scoring or ["accuracy", "fit", "roc_auc"],
+        scoring=scoring or ["accuracy", "f1", "roc_auc"],
         return_train_Score=False,
         n_jobs=-1
     )

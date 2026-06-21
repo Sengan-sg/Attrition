@@ -25,7 +25,7 @@ def build_pipeline(numeric_features: list[str], categorical_features: list[str])
     )
     categorical_transformer = Pipeline(
         steps=[
-            ("imputer", SimpleImputer(strategy="most_frequest")),
+            ("imputer", SimpleImputer(strategy="most_frequent")),
             ("encoder", OneHotEncoder(handle_unknown="ignore"))
         ]
     )

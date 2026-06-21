@@ -5,7 +5,7 @@ import pandas as pd
 _TRAVEL_ORDINAL: dict[str, int] = {
     "Non-Travel": 0,
     "Travel_Rarely": 1,
-    "Travel_Frequently": 2
+    "Travel_Frequently": 2,
 }
 
 # Binary gender mapping
@@ -22,9 +22,9 @@ def encode_ordinal_features(frame: pd.DataFrame) -> pd.DataFrame:
         A DataFrame with ordinal features encoded as integers.
     """
     result = frame.copy()
-    if 'BusinessTravel' in frame.columns:
+    if 'BusinessTravel' in result.columns:
         result['BusinessTravelEncoded'] = (
-            frame['BusinessTravel'].map(_TRAVEL_ORDINAL).astype("Int64")
+            result['BusinessTravel'].map(_TRAVEL_ORDINAL).astype("Int64")
         )
     return result
 
