@@ -1,0 +1,16 @@
+data:
+  train_path: data/processed/train.csv
+  test_path: data/processed/test.csv
+
+model:
+  algorithm: xgboost
+  random_state: 42
+  test_size: 0.2
+
+threshold:
+  probability: 0.5
+
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: logs/app.log
