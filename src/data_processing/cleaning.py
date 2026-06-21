@@ -15,7 +15,7 @@ _OUTLIER_COLUMNS: list[str] = [
 ]
 
 
-def cleaning_raw_data(frame: pd.DataFrame) -> pd.DataFrame:
+def clean_raw_data(frame: pd.DataFrame) -> pd.DataFrame:
     """Pre-split structural cleanup.
 
     Safe to call on the full dataset before the train-test split because no 

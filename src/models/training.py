@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-from employee_attrition.configs.settings import Config
+from src.configs.settings import Config
 
 @dataclass(slots=True)
 class TrainingResult:

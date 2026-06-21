@@ -2,13 +2,16 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+def _project_root() -> Path:
+    return Path(__file__).resolve().parents[2]
+
 @dataclass(slots=True)
 class ProjectPaths:
-    root: Path = Path.cwd()
-    data_raw: Path = field(default_factory=lambda: Path.cwd() / "data" / "raw")
-    data_processed: Path = field(default_factory=lambda: Path.cwd() / "data" / "processed")
-    models: Path = field(default_factory=lambda: Path.cwd() / "models")
-    reports: Path = field(default_factory=lambda: Path.cwd() / "reports")
+    root: Path = _project_root()
+    data_raw: Path = field(default_factory=lambda: _project_root() / "data" / "raw")
+    data_processed: Path = field(default_factory=lambda: _project_root() / "data" / "processed")
+    models: Path = field(default_factory=lambda: _project_root() / "models")
+    reports: Path = field(default_factory=lambda: _project_root() / "reports")
 
 @dataclass(slots=True)
 class ModelConfig:

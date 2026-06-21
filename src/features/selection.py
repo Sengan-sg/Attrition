@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Itertable
+from typing import Iterable
 
 import numpy as np
 import pandas as pd
@@ -44,7 +44,7 @@ class CorrelationSelector:
 
     def __init__(self, threshold: float = 0.90) -> None:
         self.threshold = threshold
-        self._drop = list[str] = []
+        self._drop: list[str] = []
     
     def fit(self, frame: pd.DataFrame) -> "CorrelationSelector":
         numeric = frame.select_dtypes(include=["number"])
